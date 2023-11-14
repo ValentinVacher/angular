@@ -1,0 +1,38 @@
+<main class="w-75 m-auto card shadow p-4 mt-5">
+    <form (ngSubmit)="onSubmitSignIn(signInForm)" #signInForm="ngForm">
+
+        <h1 class="fw-normal text-center">CONNEXION</h1>
+
+        <div class="mt-3">
+            <label for="email" class="form-label">Adresse email</label>
+            <input type="email" class="form-control" id="email" placeholder="Adresse email" name="email"
+                   autocomplete="email" required email ngModel>
+        </div>
+
+        <div class="mt-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password"
+                   required ngModel>
+        </div>
+
+        <div class="form-check text-start mt-3">
+            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault"
+                   name="keepConnection" [ngModel]="false">
+            <label class="form-check-label" for="flexCheckDefault">
+                Se souvenir de moi
+            </label>
+        </div>
+
+        <p class="alert alert-danger mt-3 p-2" *ngIf="isValid">Votre adresse email ou votre mot de passe sont
+            incorrects</p>
+
+        <div class="text-center mt-3">
+            <button
+                    type="submit"
+                    class="btn btn-dark w-50 py-2"
+                    [disabled]="signInForm.invalid">
+                CONNEXION
+            </button>
+        </div>
+    </form>
+</main>
