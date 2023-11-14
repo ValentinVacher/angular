@@ -22,12 +22,12 @@ export interface MonsterHttp {
     element: string
     condition: string
   }[]
-  weakness: {
+  weaknesses: {
     element: string
     stars: number
     condition: string
   }[]
-  reward: {
+  rewards: {
     id: number
     items: {
       id: number
@@ -65,16 +65,12 @@ export interface Monster {
       zone: number
     }[]
   }[]
-  resistances: {
-    element: string
-    condition: string
-  }[]
-  weakness: {
+  resistances: string[]
+  weaknesses: {
     element: string
     stars: number
-    condition: string
   }[]
-  reward: {
+  rewards: {
     id: number
     items: {
       id: number
@@ -100,8 +96,12 @@ export namespace Monster {
 
   export function mapperMonsterHttpToMonster(monsterHttp: MonsterHttp): Monster {
     const ailments: Ailment[] = []
+    const resistances: any = []
+    const weaknesses: any = []
 
     monsterHttp.ailments.forEach(ailment => ailments.push(mapperAilmentHttpToAilment(ailment)))
+    monsterHttp.resistances.forEach(resistance => resistances.push(resistance.element))
+    monsterHttp.weaknesses.forEach(newWeakness => weaknesses.push({element: newWeakness.element, stars: newWeakness.stars}))
 
     return {
       id: monsterHttp.id,
@@ -112,9 +112,9 @@ export namespace Monster {
       elements: monsterHttp.elements,
       ailments: ailments,
       locations: monsterHttp.locations,
-      resistances: monsterHttp.resistances,
-      weakness: monsterHttp.weakness,
-      reward: monsterHttp.reward
+      resistances: resistances,
+      weaknesses: weaknesses,
+      rewards: monsterHttp.rewards
     }
   }
 }
