@@ -9,14 +9,17 @@ import {AuthService} from "../../services/auth/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
   iconeHome = faHouse
   iconLogout = faUser
 
-  isConnected
+  isConnected$?: Observable<boolean>
 
   constructor(private authService:AuthService, private router:Router) {
-    this.isConnected = authService.isConnected
+  }
+
+  ngOnInit() {
+    this.isConnected$ = this.authService.token$.pipe(map((token:string|undefined) => Boolean(token)))
   }
 
   onClickSignOut(){

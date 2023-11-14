@@ -9,7 +9,7 @@ import {DetailsMonsterComponent} from "./pages/monsters/details-monster/details-
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'monsters'},
   {path: 'auth/signin', component: SigninComponent},
-  {path: 'monsters', /*canActivate: [authGuard],*/ children: [
+  {path: 'monsters', canActivate: [authGuard],children: [
       {path: '', component: ListMonsterComponent},
       {path: ':id', component: DetailsMonsterComponent}
     ]},

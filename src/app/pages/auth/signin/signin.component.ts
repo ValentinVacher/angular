@@ -9,7 +9,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent {
-  isValid = false
+  isValid = true
 
   constructor(private authService: AuthService, private  router: Router) {
   }
@@ -18,11 +18,10 @@ export class SigninComponent {
     if (form.valid) {
       const {email, password, keepConnection} = form.value
 
-      if(this.authService.signIn(email, password, keepConnection)){
-        this.router.navigateByUrl('monsters')
-      } else {
-        this.isValid = true
-      }
+      this.authService
+        .signIn(email, password, keepConnection)
+        .then(() => this.router.navigateByUrl('monsters'))
+        .catch(() => this.isValid = false)
     }
   }
 }

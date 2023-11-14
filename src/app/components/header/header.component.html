@@ -10,13 +10,13 @@
           <li>
             <a routerLink="/monsters" class="nav-link text-white">
               <fa-icon class="me-1" [icon]="iconeHome"></fa-icon>
-              Acceuil
+              HOME
             </a>
           </li>
-          <li *ngIf="isConnected">
+          <li *ngIf="isConnected$ | async">
             <button (click)="onClickSignOut()" class="btn btn-outline-light ">
               <fa-icon class="me-1"  [icon]="iconLogout"></fa-icon>
-              Déconnexion
+              Log out
             </button>
           </li>
         </ul>
