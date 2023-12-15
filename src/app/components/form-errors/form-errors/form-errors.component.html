@@ -1,0 +1,22 @@
+<div *ngIf="control
+                  && control.invalid
+                  && (control.dirty || control.touched) && control.errors"
+     class="alert-danger alert p-2 my-1">
+
+  <div *ngIf="control.errors['required']">
+    The field '{{controlLabel}}' is obligatory.
+  </div>
+  <div *ngIf="control.errors['minlength']">
+    The field '{{controlLabel}}' must have at
+    least {{control.errors['minlength']['requiredLength']}} {{control.errors['minlength']['requiredLength'] === 1 ? 'caractère' : 'caractères'}}
+    .
+  </div>
+
+  <div *ngIf="control.errors['maxlength']">
+    The field '{{controlLabel}}' must have at
+    maximum
+    {{control.errors['maxlength']['requiredLength']}} {{control.errors['maxlength']['requiredLength'] === 1 ? 'character' : 'characters'}}
+    .
+  </div>
+
+</div>
