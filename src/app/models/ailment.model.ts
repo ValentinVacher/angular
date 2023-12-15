@@ -58,7 +58,6 @@ export interface AilmentHttp {
 }
 
 export interface Ailment {
-  id: number
   name: string
   description: string
 }
@@ -66,7 +65,6 @@ export interface Ailment {
 export namespace Ailment{
   export function mapperAilmentHttpToAilment(ailmentHttp: AilmentHttp): Ailment{
     return {
-      id: ailmentHttp.id,
       name: ailmentHttp.name,
       description: ailmentHttp.description
     }

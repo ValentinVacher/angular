@@ -14,6 +14,7 @@ export class SigninComponent {
   constructor(private authService: AuthService, private  router: Router) {
   }
 
+  //sign in user
   onSubmitSignIn(form: NgForm) {
     if (form.valid) {
       const {email, password, keepConnection} = form.value

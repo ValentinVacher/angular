@@ -1,1 +1,147 @@
-<p>details-monster works!</p>
+<main class="mb-5 p-4">
+  <section>
+    <div class="d-flex justify-content-end my-3">
+      <a class="btn btn-primary" routerLink="/">RETURN TO HOME</a>
+    </div>
+
+    <div *ngIf="!monsterExist" class="spinner-border d-block mx-auto" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <ng-container *ngIf="(monster$ |async) as monster">
+      <h1 class="text-center text-uppercase">{{monster.name}}</h1>
+
+      <div class="d-flex justify-content-around mt-5">
+        <h2 class="h4">TYPE : {{monster.type}}</h2>
+        <h2 class="h4">SPECIES : {{monster.species}}</h2>
+      </div>
+
+      <div class="text-center mt-5">
+        <h3>DESCRIPTION :</h3>
+        <p class="h5 p-4 border rounded mt-4 w-50 mx-auto">{{monster.description}}</p>
+      </div>
+
+      <div class="row d-flex align-items-center mt-5">
+        <div *ngIf="monster.elements.length > 0" class="text-center mt-5 col-6">
+          <h3>ELEMENT :</h3>
+
+          <div class="row gap-3 d-flex justify-content-center">
+            <div *ngFor="let element of monster.elements" class="card col-3 p-3 mt-4">
+              <p class="h5 text-center card-text">{{element}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="monster.resistances.length > 0" class="text-center mt-5 col-6">
+          <h3>RESISTANCE :</h3>
+
+          <div class="row gap-3 d-flex justify-content-center">
+            <div class="card col-3 p-3" *ngFor="let resistance of monster.resistances">
+              <p class="h5 text-center card-text">{{resistance}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5" *ngIf="monster.ailments.length > 0">
+        <h3>AILMENT :</h3>
+
+        <table class="table table-striped mt-4">
+          <thead class="table-dark">
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ailment of monster.ailments">
+            <td>{{ailment.name}}</td>
+            <td>{{ailment.description}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row offset-2 d-flex align-items-center my-5" *ngIf="monster.weaknesses.length > 0">
+        <div class="col-4">
+          <h3 class="mt-5 text-center">WEAKNESS :</h3>
+          <table class="table table-striped mt-4">
+            <thead class="table-dark">
+            <tr>
+              <th scope="col">element</th>
+              <th scope="col" class="text-center">stars</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let weakness of monster.weaknesses">
+              <td>{{weakness.element}}</td>
+              <td class="text-center">
+                <fa-icon *ngFor="let e of fakArray; index as i" [icon]="iconStar"
+                         [class.text-warning]="i < weakness.stars"></fa-icon>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5 col-4 offset-2" *ngIf="monster.locations.length > 0">
+          <h3 class="text-center">LOCATIONS :</h3>
+
+          <table class="table table-striped mt-4">
+            <thead class="table-dark">
+            <tr>
+              <th scope="col">name</th>
+              <th scope="col" class="text-center">zone count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let location of monster.locations">
+              <td>{{location.name}}</td>
+              <td class="text-center">{{location.zoneCount}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div *ngIf="monster.rewards.length > 0">
+        <h3 class="text-center mt-5 mb-4">REWARDS :</h3>
+
+        <div class="card mb-3" *ngFor="let reward of monster.rewards">
+          <div class="card-header d-flex justify-content-center">
+            <h4 class="card-title m-0">{{reward.item.name}}</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-center h5">{{reward.item.description}}</p>
+
+            <div class="mt-4" *ngIf="reward.conditions.length > 0">
+              <h5 class="text-center mb-3">CONDITIONS :</h5>
+
+              <table class="table table-striped">
+                <thead class="table-dark">
+                <tr>
+                  <th scope="col">type</th>
+                  <th scope="col">subtype</th>
+                  <th scope="col">rank</th>
+                  <th scope="col">quantity</th>
+                  <th scope="col">chance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let condition of reward.conditions">
+                  <td class="col-1">{{condition.type}}</td>
+                  <td class="col-1">{{condition.subtype}}</td>
+                  <td class="col-1">{{condition.rank}}</td>
+                  <td class="col-1">{{condition.quantity}}</td>
+                  <td class="col-1">{{condition.chance}}%</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+  </section>
+</main>

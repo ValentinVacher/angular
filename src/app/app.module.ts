@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormErrorsComponent } from './components/form-errors/form-errors/form-errors.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SigninComponent,
     DetailsMonsterComponent,
     ListMonsterComponent,
-    HeaderComponent
+    HeaderComponent,
+    FormErrorsComponent
   ],
   imports: [
     BrowserModule,
